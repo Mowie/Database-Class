@@ -108,6 +108,22 @@ If you provide more than one key, you can choose via this pararmeter how to conn
 
 Resets the current table and contents of `$db->data`. This function will be executed automatically if you execute `$db->setCol()`.
 
+##createCol()
+
+Creates a new table.
+
+###Syntax
+
+`$db->createCol($name, $structure)`
+
+`$name`
+The name of the Table.
+
+`$structure`
+An array containing the structure of the new table. Example: `['id' => 'int', 'title' => 'string', 'content' => 'longstring']`.
+
+Supported types are `int`, `string`, `longstring` & `boolean`.
+
 # Examples
 
 ## Getting Data

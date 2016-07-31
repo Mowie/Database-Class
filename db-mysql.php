@@ -24,7 +24,14 @@ class db
 		$this->pass = $pass;
 		$this->prefix = $prefix;
 
-		$this->dbh = new PDO('mysql:host=' . $host . ';dbname=' . $dbname, $usr, $pass);
+		try
+		{
+			$this->dbh = new PDO('mysql:host=' . $host . ';dbname=' . $dbname, $usr, $pass);
+		}
+		catch(PDOException $e) {
+			echo $e->getMessage();
+			exit;
+		}
 
 		//UTF-8
 		$this->dbh->exec("SET NAMES 'utf8'");
@@ -253,6 +260,23 @@ class db
 			$delete = $this->dbh->prepare($stmt);
 			return $delete->execute($vals);
 		}
+	}
+
+	//Create Table
+	public function createCol($name, $rows)
+	{
+		$dataTypes = ['int' => 'bigint(11) NOT NULL', 'string' => 'text CHARACTER SET utf8 NOT NULL', 'longstring' => 'longtext CHARACTER SET utf8 NOT NULL', 'boolean' => 'tinyint(1) NOT NULL'];
+		$stmt = 'CREATE TABLE '.$name.'(';
+		foreach ($rows as $colname => $coldata)
+		{
+			if(array_key_exists($coldata, $dataTypes))
+			{
+				$stmt .= $colname . ' ' . $dataTypes[$coldata] . ',';
+			}
+		}
+		$stmt = substr($stmt, 0, strlen($stmt) - 1);
+		$stmt .= ')';
+		return $this->dbh->exec($stmt);
 	}
 
 	//Version

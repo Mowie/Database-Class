@@ -1,7 +1,7 @@
 <?php
 require_once 'db-mysql.php';
 
-$db = new db('localhost', 'testdb', 'root', 'supersecretpassword');
+$db = new db('localhost', 'testdb', 'root', 'jup2000');
 $db->setCol('blog');
 //$db->data['id'] = 13;
 //$db->get();
@@ -23,4 +23,5 @@ $db->data['inhalt'] = 'gabs noch net';*/
 //$db->delete();
 //if($db->delete(['id' => 6])) echo 'del';
 
+var_dump($db->createCol('test', ['id' => 'int', 'title' => 'string', 'content' => 'longstring', 'boolean' => 'boolean']));
 $db->clear();

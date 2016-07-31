@@ -127,6 +127,19 @@ class db
 		}
 	}
 
+	//Create Table
+	public function createCol($name, $rows)
+	{
+		$dataTypes = ['int' => 'bigint(11) NOT NULL', 'string' => 'text CHARACTER SET utf8 NOT NULL', 'longstring' => 'longtext CHARACTER SET utf8 NOT NULL', 'boolean' => 'tinyint(1) NOT NULL'];
+
+	}
+
+	//Version
+	public function version()
+	{
+
+	}
+
 	//Aufräumen
 	public function clear()
 	{
