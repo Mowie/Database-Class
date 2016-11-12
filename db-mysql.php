@@ -47,7 +47,7 @@ class db
 	}
 
 	//Daten holen
-	public function get($where = [], $link = 'AND')
+	public function get($where = [], $link = 'AND', $orderby = 'id', $order = 'ASC')
 	{
 		if (isset($this->col))
 		{
@@ -82,7 +82,10 @@ class db
 
 			//print_r($whereAr);
 
-			$stmt = $this->dbh->prepare('SELECT * FROM ' . $this->prefix . $this->col . $whereCl);
+			//Order
+			$orderstmt = 'ORDER BY '.$orderby.' '.$order;
+
+			$stmt = $this->dbh->prepare('SELECT * FROM `' . $this->prefix . $this->col .'`' . $whereCl.$orderstmt);
 			$stmt->execute($whereAr);
 
 			$all = [];
@@ -143,7 +146,6 @@ class db
 					$i++;
 				}
 				$stmt .= ') VALUES (' . $valCnt . ')';
-				//echo $stmt;
 
 				$insert = $this->dbh->prepare($stmt);
 				return $insert->execute($vals);
@@ -297,4 +299,10 @@ class db
 		$this->data = '';
 	}
 
+	//Query
+	public function query($query)
+	{
+		$STH = $this->dbh->prepare($query);
+		return $STH->execute();
+	}
 }

@@ -37,7 +37,7 @@ All data is available via `$db->data`.
 
 ### Syntax
 
-`$db->get($where = [], $link = 'AND')`
+`$db->get($where = [], $link = 'AND', $orderby = 'id', $order = 'ASC')`
 
 `$where`
  An array to return specific data. If provided, only data which matches is returnend. Scheme: `['key' => 'value']`.
@@ -48,6 +48,9 @@ All data is available via `$db->data`.
  If you provide more than one key, you can choose via this pararmeter how to connect them, currently via `AND` or `OR`. Standard is `AND`.
  
 To see it in action, take a look at `example.php` or the "Examples"-Section at the bottom of this document.
+
+`$orderby`
+Will sort the Output with this column ascending or descending as specified in `$order`.
 
 ## insert()
 
