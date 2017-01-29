@@ -296,7 +296,8 @@ class db
 	public function clear()
 	{
 		$this->col = null;
-		$this->data = '';
+		//$this->data = '';
+		$this->data = [];
 	}
 
 	//Query
